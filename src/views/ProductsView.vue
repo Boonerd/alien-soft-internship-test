@@ -39,7 +39,11 @@ import { useProductStore } from '@/stores/productStore'
 const store = useProductStore()
 const search = ref('')
 
-onMounted(() => store.fetchProducts())
+onMounted(() => {
+  if (store.products.length === 0) {
+    store.fetchProducts()
+  }
+})
 
 const filtered = computed(() =>
   store.products.filter(p => p.title.toLowerCase().includes(search.value.toLowerCase()))

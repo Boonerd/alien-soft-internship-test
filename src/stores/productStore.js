@@ -10,9 +10,12 @@ export const useProductStore = defineStore('product', {
   }),
   actions: {
     async fetchProducts() {
+      // Only fetch if we have NO products (prevents overwriting added ones)
+      if (this.products.length > 0) return
+
       this.loading = true
       try {
-        const res = await fetch('https://dummyjson.com/products')
+        const res = await fetch('https://dummyjson.com/products?limit=100')
         const data = await res.json()
         this.products = data.products
       } catch (err) {
@@ -36,25 +39,18 @@ export const useProductStore = defineStore('product', {
         })
         const newProduct = await res.json()
 
-        // THIS LINE MAKES IT APPEAR INSTANTLY
+        // This line makes it stay forever
         this.products.unshift(newProduct)
-
-        return newProduct
       } catch (err) {
         this.error = err.message
-        throw err
       } finally {
         this.loading = false
       }
     },
 
     async deleteProduct(id) {
-      const auth = useAuthStore()
-      await fetch(`https://dummyjson.com/products/${id}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${auth.token}` }
-      })
       this.products = this.products.filter(p => p.id !== id)
     }
-  }
+  },
+  persist: true  // ← THIS SAVES YOUR ADDED PRODUCTS TO BROWSER STORAGE
 })
