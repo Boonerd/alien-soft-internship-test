@@ -1,38 +1,34 @@
-# alien-product-app
+# AlienSoft Frontend Test - Patriciah Mbua
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue 3 + Pinia + Vue Router + Tailwind CSS Product Management App
 
-## Recommended IDE Setup
+## Live Demo
+https://patriciahmbua.github.io/alien-product-app/
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Login Credentials
+- Username: `kminchelle`
+- Password: `0lelplR`
 
-## Recommended Browser Setup
+## Features Implemented
+- Full authentication using DummyJSON API
+- Token persistence with Pinia + localStorage (session survives refresh)
+- Protected routes (only logged-in users can access /products)
+- Product listing with real-time search
+- Add new product
+- View product details
+- Delete product with confirmation
+- Responsive design with Tailwind CSS
+- Primary color: #000080 (navy blue)
+- Clean, modern UI with loading states
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Tech Stack
+- Vue 3 (Composition API + `<script setup>`)
+- Pinia (auth & product stores)
+- Vue Router (with guards)
+- Tailwind CSS v3
+- Vite
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+## Setup & Run
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
