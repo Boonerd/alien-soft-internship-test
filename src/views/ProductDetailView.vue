@@ -11,6 +11,12 @@
           <p><strong>Category:</strong> {{ product.category }}</p>
           <p><strong>Stock:</strong> {{ product.stock }}</p>
         </div>
+        <div class="flex items-center gap-2 text-yellow-600">
+          <span class="font-bold">Rating:</span> {{ product.rating }} / 5
+        </div>
+        <div class="text-green-600 font-bold">
+          Discount: {{ product.discountPercentage }}% OFF
+        </div>
         <button @click="remove" class="mt-10 bg-red-600 text-white px-8 py-4 rounded-lg hover:bg-red-700">
           Delete Product
         </button>

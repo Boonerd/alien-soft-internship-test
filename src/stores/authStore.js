@@ -10,12 +10,14 @@ export const useAuthStore = defineStore('auth', {
   },
   actions: {
     async login({ username, password }) {
-      // This is the ONLY way that works in 2025 with Vite dev server
       const res = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-        // Remove credentials: 'include' → causes CORS block in dev
+        body: JSON.stringify({
+          username,
+          password,
+          expiresInMins: 30  // Optional, as per docs (defaults to 60)
+        })
       })
 
       const data = await res.json()
@@ -24,8 +26,7 @@ export const useAuthStore = defineStore('auth', {
         throw new Error(data.message || 'Invalid credentials')
       }
 
-      // DummyJSON returns token in response body (not cookie anymore in dev)
-      this.token = data.token
+      this.token = data.accessToken  // Correct field from docs
       this.user = data
     },
     logout() {
@@ -33,5 +34,5 @@ export const useAuthStore = defineStore('auth', {
       this.user = null
     }
   },
-  persist: true  // Saves to localStorage → survives refresh
+  persist: true  // Saves to localStorage
 })
