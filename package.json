@@ -15,6 +15,8 @@
     "lint": "run-s lint:*"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.2.0",
     "axios": "^1.13.2",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.7.1",

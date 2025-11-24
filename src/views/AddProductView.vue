@@ -1,77 +1,57 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-12 px-4">
-    <div class="max-w-2xl mx-auto">
-      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-        <h2 class="text-3xl font-bold text-[#000080] text-center mb-10">Add New Product</h2>
+  <AppLayout>
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Add New Product</h1>
+      <p class="text-gray-600 mb-10">Enter the details below to add a new item to your inventory.</p>
 
-        <form @submit.prevent="add" class="space-y-6">
-          <input
-            v-model="form.title"
-            placeholder="Product Title"
-            class="w-full px-5 py-4 rounded-lg border border-gray-300 focus:border-[#000080] focus:outline-none text-base"
-            required
-          />
+      <div class="bg-white rounded-2xl shadow-sm p-10 space-y-8">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Product Title</label>
+          <input v-model="form.title" placeholder="e.g. Wireless Headphones" class="w-full px-5 py-4 border rounded-xl focus:outline-none focus:border-[#000080]" required />
+        </div>
 
-          <textarea
-            v-model="form.description"
-            placeholder="Description"
-            class="w-full px-5 py-4 rounded-lg border border-gray-300 focus:border-[#000080] focus:outline-none text-base h-32 resize-none"
-            required
-          ></textarea>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Product Description</label>
+          <textarea v-model="form.description" rows="4" placeholder="Provide a detailed description..." class="w-full px-5 py-4 border rounded-xl focus:outline-none focus:border-[#000080]" required></textarea>
+        </div>
 
-          <input
-            v-model="form.category"
-            placeholder="Category (e.g. beauty, electronics)"
-            class="w-full px-5 py-4 rounded-lg border border-gray-300 focus:border-[#000080] focus:outline-none text-base"
-            required
-          />
-
-          <!-- PRICE WITH KSh LABEL -->
-          <div class="relative">
-            <span class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">USD</span>
-            <input
-              v-model.number="form.price"
-              type="number"
-              placeholder="Price"
-              class="w-full pl-16 pr-5 py-4 rounded-lg border border-gray-300 focus:border-[#000080] focus:outline-none text-base"
-              required
-            />
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Price (KSh)</label>
+            <input v-model.number="form.price" type="number" placeholder="2499" class="w-full px-5 py-4 border rounded-xl focus:outline-none focus:border-[#000080]" required />
           </div>
-
-          <!-- STOCK WITH Qty LABEL -->
-          <div class="relative">
-            <span class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">Qty</span>
-            <input
-              v-model.number="form.stock"
-              type="number"
-              placeholder="Stock Quantity"
-              class="w-full pl-16 pr-5 py-4 rounded-lg border border-gray-300 focus:border-[#000080] focus:outline-none text-base"
-              required
-            />
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Stock Quantity</label>
+            <input v-model.number="form.stock" type="number" placeholder="150" class="w-full px-5 py-4 border rounded-xl focus:outline-none focus:border-[#000080]" required />
           </div>
+        </div>
 
-          <input
-            v-model="form.thumbnail"
-            placeholder="Thumbnail URL (optional)"
-            class="w-full px-5 py-4 rounded-lg border border-gray-300 focus:border-[#000080] focus:outline-none text-base"
-          />
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+          <input v-model="form.category" placeholder="e.g. electronics, beauty" class="w-full px-5 py-4 border rounded-xl focus:outline-none focus:border-[#000080]" required />
+        </div>
 
-          <button
-            type="submit"
-            class="w-full bg-[#000080] text-white font-bold py-4 rounded-lg hover:bg-[#000060] transition text-lg shadow-md"
-          >
-            Create Product
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Thumbnail URL (optional)</label>
+          <input v-model="form.thumbnail" placeholder="https://..." class="w-full px-5 py-4 border rounded-xl focus:outline-none focus:border-[#000080]" />
+        </div>
+
+        <div class="flex justify-end gap-4 pt-6">
+          <router-link to="/products" class="px-8 py-4 border rounded-lg hover:bg-gray-50 font-medium">Cancel</router-link>
+          <button @click="save" class="bg-[#000080] text-white px-8 py-4 rounded-lg font-bold hover:bg-[#000060] transition">
+            Save Product
           </button>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
+  </AppLayout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/productStore'
+import AppLayout from '@/components/AppLayout.vue'
 
 const router = useRouter()
 const store = useProductStore()
@@ -79,14 +59,14 @@ const store = useProductStore()
 const form = ref({
   title: '',
   description: '',
+  price: 0,
+  stock: 0,
   category: '',
-  price: '',
-  stock: '',
   thumbnail: 'https://cdn.dummyjson.com/product-images/1/thumbnail.jpg'
 })
 
-const add = async () => {
-  await store.addProduct(form.value)
+const save = async () => {
+  await store.addProduct({ ...form.value })
   router.push('/products')
 }
 </script>
