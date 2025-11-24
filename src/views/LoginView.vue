@@ -28,6 +28,7 @@ const login = async () => {
   try {
     await auth.login({ username: username.value, password: password.value })
     router.push('/products')
+  // eslint-disable-next-line no-unused-vars
   } catch (e) {
     error.value = 'Invalid credentials'
   }
