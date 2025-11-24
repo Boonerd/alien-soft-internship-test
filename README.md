@@ -1,34 +1,38 @@
-# AlienSoft Frontend Test - Patriciah Mbua
+# AlienSoft Product Management App
 
-Vue 3 + Pinia + Vue Router + Tailwind CSS Product Management App
+Built with **Vue 3 + Composition API + Pinia + Vue Router + Tailwind CSS**
 
 ## Live Demo
 https://patriciahmbua.github.io/alien-product-app/
 
-## Login Credentials
-- Username: `kminchelle`
-- Password: `0lelplR`
+## Features
+- Real authentication using DummyJSON API
+- Full CRUD operations (Add, View, Delete products)
+- Products persist in browser (added items don't disappear)
+- Search by product title
+- Fully responsive design
+- Route protection
+- Primary color: #000080 (as specified)
 
-## Features Implemented
-- Full authentication using DummyJSON API
-- Token persistence with Pinia + localStorage (session survives refresh)
-- Protected routes (only logged-in users can access /products)
-- Product listing with real-time search
-- Add new product
-- View product details
-- Delete product with confirmation
-- Responsive design with Tailwind CSS
-- Primary color: #000080 (navy blue)
-- Clean, modern UI with loading states
+## Login Credentials (any of these work)
+- `emilys` / `emilyspass`
+- `michaelw` / `michaelwpass`
+- `sophiab` / `sophiabpass`
+- `jamesd` / `jamesdpass`
 
-## Tech Stack
-- Vue 3 (Composition API + `<script setup>`)
-- Pinia (auth & product stores)
-- Vue Router (with guards)
-- Tailwind CSS v3
-- Vite
-
-## Setup & Run
+## Setup
 ```bash
+git clone https://github.com/PatriciahMbua/alien-product-app.git
+cd alien-product-app
 npm install
 npm run dev
+
+Tech Stack
+
+Vue 3 (Composition API)
+Pinia (with persistence)
+Vue Router
+Tailwind CSS v3
+DummyJSON API
+
+Thank you AlienSoft for this opportunity!
