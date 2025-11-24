@@ -1,45 +1,20 @@
 import { defineStore } from 'pinia'
-import { useAuthStore } from './authStore'
 
 export const useProductStore = defineStore('products', {
-  state: () => ({
-    products: [],
-    loading: false,
-    error: null
-  }),
+  state: () => ({ products: [], loading: false }),
   actions: {
     async fetchProducts() {
       this.loading = true
-      try {
-        const res = await fetch('https://dummyjson.com/products')
-        const data = await res.json()
-        this.products = data.products
-      } catch (e) {
-        this.error = 'Failed to load products'
-      } finally {
-        this.loading = false
-      }
-    },
-    async fetchProduct(id) {
-      const res = await fetch(`https://dummyjson.com/products/${id}`)
-      return (await res.json())
-    },
-    async addProduct(product) {
-      const auth = useAuthStore()
-      const res = await fetch('https://dummyjson.com/products/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${auth.token || 'dummy'}`
-        },
-        body: JSON.stringify(product)
-      })
+      const res = await fetch('https://dummyjson.com/products')
       const data = await res.json()
-      this.products.unshift(data)
-      return data
+      this.products = data.products
+      this.loading = false
     },
-    async deleteProduct(id) {
-      this.products = this.products.filter(p => p.id !== parseInt(id))
+    async addProduct(p) {
+      this.products.unshift({ ...p, id: Date.now() })
+    },
+    deleteProduct(id) {
+      this.products = this.products.filter(p => p.id !== id)
     }
   }
 })

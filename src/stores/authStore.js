@@ -1,29 +1,20 @@
 import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    token: '',
-    user: null
-  }),
-  getters: {
-    isAuthenticated: (state) => !!state.token
-  },
+  state: () => ({ token: '', user: null }),
+  getters: { isAuthenticated: state => !!state.token },
   actions: {
-    async login(credentials) {
+    async login({ username, password }) {
       const res = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials)
+        body: JSON.stringify({ username, password })
       })
-      if (!res.ok) throw new Error('Invalid credentials')
       const data = await res.json()
       this.token = data.token
       this.user = data
     },
-    logout() {
-      this.token = ''
-      this.user = null
-    }
+    logout() { this.token = ''; this.user = null }
   },
   persist: true
 })
