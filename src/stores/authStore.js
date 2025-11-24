@@ -1,20 +1,28 @@
 import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
-  state: () => ({ token: '', user: null }),
-  getters: { isAuthenticated: state => !!state.token },
+  state: () => ({
+    token: null,
+    user: null
+  }),
+  getters: {
+    isAuthenticated: (state) => !!state.token
+  },
   actions: {
-    async login({ username, password }) {
+    async login(credentials) {
       const res = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify(credentials)
       })
       const data = await res.json()
       this.token = data.token
       this.user = data
     },
-    logout() { this.token = ''; this.user = null }
+    logout() {
+      this.token = null
+      this.user = null
+    }
   },
   persist: true
 })

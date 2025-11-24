@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
 
 export const useProductStore = defineStore('products', {
-  state: () => ({ products: [], loading: false }),
+  state: () => ({
+    products: [],
+    loading: false
+  }),
   actions: {
     async fetchProducts() {
       this.loading = true
@@ -10,8 +13,8 @@ export const useProductStore = defineStore('products', {
       this.products = data.products
       this.loading = false
     },
-    async addProduct(p) {
-      this.products.unshift({ ...p, id: Date.now() })
+    addProduct(product) {
+      this.products.unshift({ ...product, id: Date.now() })
     },
     deleteProduct(id) {
       this.products = this.products.filter(p => p.id !== id)
