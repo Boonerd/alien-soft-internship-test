@@ -7,39 +7,24 @@ import ProductDetailView from '@/views/ProductDetailView.vue'
 import { useAuthStore } from '@/stores/authStore'
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: ProductsView,  // Home page = Product List
-    meta: { requiresAuth: true }
-  },
+  { path: '/login', component: LoginView },
+  { path: '/', redirect: '/products' },
   {
     path: '/products',
-    name: 'products',
     component: ProductsView,
     meta: { requiresAuth: true }
   },
   {
     path: '/products/new',
-    name: 'add-product',
     component: AddProductView,
     meta: { requiresAuth: true }
   },
   {
     path: '/products/:id',
-    name: 'product-detail',
     component: ProductDetailView,
     meta: { requiresAuth: true }
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    redirect: '/'
-  }
+  { path: '/:pathMatch(.*)*', redirect: '/login' }
 ]
 
 const router = createRouter({
@@ -48,12 +33,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const auth = useAuthStore()
-
-  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+  const authStore = useAuthStore()
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next('/login')
-  } else if (to.name === 'login' && auth.isAuthenticated) {
-    next('/')
+  // not logged in → go login
+  } else if (to.path === '/login' && authStore.isAuthenticated) {
+    next('/products')  // already logged in → go products
   } else {
     next()
   }
