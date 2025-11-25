@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AlienSoft Admin</title>
+    <script>
+      // This redirects any 404 to your app with the correct path
+      const path = location.pathname.replace('/alien-soft-internship-test', '');
+      location.replace('/alien-soft-internship-test/' + (path || '') + location.search + location.hash);
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
