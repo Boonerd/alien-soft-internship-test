@@ -17,7 +17,7 @@
 
         <div class="grid grid-cols-2 gap-8">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Price (KSh)</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Price $</label>
             <input v-model.number="form.price" type="number" placeholder="2499" class="w-full px-5 py-4 border rounded-xl focus:outline-none focus:border-[#000080]" required />
           </div>
           <div>
