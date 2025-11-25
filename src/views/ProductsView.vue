@@ -7,15 +7,7 @@
           <h1 class="text-3xl font-bold text-gray-900">Products</h1>
           <p class="text-gray-600 mt-1">Manage your inventory and view product performance.</p>
         </div>
-        <router-link
-          to="/products/new"
-          class="bg-[#000080] hover:bg-[#000060] text-white font-medium px-6 py-3 rounded-lg flex items-center gap-2 transition"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          Add New Product
-        </router-link>
+
       </div>
 
       <!-- Search Bar -->

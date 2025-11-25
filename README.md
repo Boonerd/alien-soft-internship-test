@@ -43,3 +43,23 @@ git clone https://github.com/boonerd/alien-soft-internship-test.git
 cd alien-soft-internship-test
 npm install
 npm run dev
+
+Open http://localhost:5173
+
+Deployment
+Built and deployed with:
+npm run build
+npm run deploy   # uses gh-pages package
+
+Assumptions & Notes
+Products are fetched from https://dummyjson.com/products
+Added products are stored in Pinia (in-memory, resets on refresh — as per test scope)
+No backend persistence required
+Used base: '/alien-soft-internship-test/' in vite.config.js (required for correct GitHub Pages deployment)
+
+Thank you AlienSoft for this opportunity!
+I'm excited to join the team and contribute from day one.
+— Patriciah Mbua
+
+Final live link (working 100%):
+https://boonerd.github.io/alien-soft-internship-test/
