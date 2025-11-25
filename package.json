@@ -13,7 +13,8 @@
     "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
     "lint:eslint": "eslint . --fix --cache",
     "lint": "run-s lint:*",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "postbuild": "cp dist/index.html dist/404.html"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
